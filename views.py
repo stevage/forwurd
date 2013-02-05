@@ -11,7 +11,7 @@ def mint(request, realemail):
     commands.getoutput("postmap /etc/postfix/virtual")
     commands.getoutput("service postfix restart")
     jsonp = request.GET.get("callback")
-    if jsonp != "":
+    if jsonp:
       return HttpResponse('%s({ "anon": "%s" });' % (jsonp, anon,), mimetype="application/javascript")
     else:
       return HttpResponse("Now forwarding %s to %s." % (anon, realemail,))
